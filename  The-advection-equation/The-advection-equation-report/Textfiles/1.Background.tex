@@ -1,0 +1,62 @@
+\section{Introduction}
+Numerical weather models are an essential tool for modern society. They help predict the weather and climate, which is crucial for traffic and trade, societal safety related to weather, and predicting climate change. These models work by discretizing equations on a spatial--time grid, by applying different numerical schemes. In this report, we will study two common schemes used in meteorology, oceanography, and atmospheric physics: the Upwind scheme and the Leapfrog scheme. This will be done with the information and schemes presented in \citet{Doos2022}.
+
+When dealing with numerical models there are four main types of computational errors that can affect the result. These include: 
+When dealing with numerical models there are four main types of computational errors that can affect the result. These include:
+\begin{center}
+\begin{minipage}{0.5\textwidth}
+\begin{enumerate}
+    \item Truncation error
+    \item Stability error
+    \item Computational mode
+    \item Phase speed error.
+\end{enumerate}
+\end{minipage}
+\end{center}
+The truncation error is the most fundamental error, which arises from the finite differences method, for approximating derivatives, gives other non-zero Taylor coefficients which are neglected. The stability error is often a larger error if not treated correctly. It arises when three time steps are used in a scheme that results in there being two theoretical solutions to the scheme. These two roots are labelled the physical and computational mode, where the computational mode is an error arising from the discretization while the physical mode is the actual solution. However the output will always be a superposition of the two modes. The last major error arises from the fact that the phase speed of the analytic solution and the numeric scheme are not the same. This is due to the fact that the computational scheme uses gridded space-time, which will slightly alter the propagation speed.
+
+\subsection{The numerical models}
+The advection equation is defined as 
+\begin{equation}
+    \derivate{u}{x}+c\derivate{u}{t}=0.
+    \label{eq:advection}
+\end{equation}
+This can be solved analytically by observing that $c$ is simply the propagation speed, from an initial condition $u(t=0,x)$. However this can also be discretized using different schemes. 
+
+\subsubsection{The leapfrog scheme}
+In the Leapfrog scheme we use finite differences as 
+\begin{equation}
+    \frac{u_j^{n+1}-u_j^{n-1}}{2\Delta t} + c \frac{u_{j+1}^n-u_{j-1}^n}{2\Delta x}=0 \implies u_j^{n+1}=u_j^{n-1}-\mu \left(u_{j+1}^n-u_{j-1}^n\right),
+    \label{eq:leapfrog} 
+\end{equation}
+where $x=j\Delta x$, $t=n\Delta t$ and $\mu=c\Delta t/ \Delta x$ is the Courant number. Here the Truncation error is in the order of $\sim \mathcal{O}\left[ (\Delta x)^2\right]\sim \mathcal{O}\left[ (\Delta t)^2\right]$. Since this is a iterative method of finding the nex step, one has two start with two time-steps for this to work. The most common choice for this second time-step is to use the forward Euler method
+\begin{equation}
+    \frac{u_j^{n+1}-u_j^{n}}{\Delta t} + c \frac{u_{j+1}^n-u_{j-1}^n}{2\Delta x}=0 \implies
+u_j^{n+1} = u_j^n - \frac{\mu}{2} \left(u_{j+1}^n - u_{j-1}^n \right).
+    \label{eq:forwardEuler}
+\end{equation}
+The Leapfrog scheme is stable if one chooses a Courant number $\abs\mu\leq1$, since this will always yield a stability parameter $\lambda=1$.  
+
+\subsubsection{The upwind scheme}
+The Upwind scheme uses the fact that we know which direction propagation comes from. If we know that the propagation is to the right ($c>$) gives 
+\begin{equation}
+    \frac{u_j^{n+1}-u_j^{n}}{\Delta t} + c \frac{u_j^n-u_{j-1}^n}{\Delta x}=0 \implies
+u_j^{n+1} = u_j^n - \mu \left(u_j^n - u_{j-1}^n \right).
+    \label{eq:upwind}
+\end{equation}
+Here the Truncation error is higher at $\sim \mathcal{O}\left[ \Delta x\right]\sim \mathcal{O}\left[ \Delta t\right]$. The stability here is still $\mu<1$. However, the stability parameter is dependent on $\mu$, which leads to a Courant number less than one yielding a stability parameter less than one and thus diffusion of the amplitude with time.
+
+\subsubsection{The phase speed error}
+One interesting concept to keep in mind, when dealing with these numerical models is that the phase speed observed from the models may differ from the theoretical phase speed. If one looks at the Leapfrog scheme one can derive 
+\begin{equation}
+    \frac{c_D}{c}=\frac{1}{\mu k\Delta x } \arcsin\left[\mu\sin(k\Delta x)\right],
+    \label{eq:phasespeed}
+\end{equation}
+where $c_D$ is the computational phase speed and $c$ is the theoretical phase speed. One can thus observe a larger phase speed error when $\mu$ becomes smaller than one and when $k\Delta x$ decreases. 
+
+\subsubsection{Robert-Asselin filtering}
+There are different ways to get rid of this computational mode and thus get cleaner results. One common way is to use some kind of filter, such as the Robert-Asselin filter. The Robert-Asselin filter works by smoothing the result, since the computational mode adds background noise. This is done as
+\begin{equation}
+    u_\text{filtered}^n=u^n+\gamma\left(u_\text{filtered}^{n-1}-2u^n+u^{n+1}\right),
+\end{equation}
+where $\gamma$ is a filtering parameter. The Robert-Asselin filter has the drawback in that a it also dampens the result by a factor $\left[1-4\gamma\sin(\omega\Delta t / 2)\right]$ due to the dispersion-like smoothing. Furthermore, this parameter also affects the stability criteria so that, for example, in the Leapfrog scheme where the new stability condition becomes $\mu+\gamma\leq1$. 

@@ -1,0 +1,110 @@
+\section{Introduction}
+Numerical weather models ... \citet{Doos2022}.
+
+The shallow water equations are a simplified version of the Navier-Stokes equations, which govern fluid flow. The shallow water equations are 
+\begin{subequations}
+\begin{empheq}[left=\empheqlbrace]{align}
+    \frac{\partial u}{\partial t} + g \frac{\partial h}{\partial x} &= 0 \\
+    \frac{\partial h}{\partial t} + H \frac{\partial u}{\partial x} &= 0
+\end{empheq}
+\label{eq:SWE}
+\end{subequations}
+
+The analytical solution to the shallow water equations, assuming periodic boundary conditions and initial velocity of $u(x,0)=0$, can be written as two opposing travelling waves
+\begin{align*}
+    h(x,t) &= h_1(x - c\, t) + h_2(x + c\, t), \\
+    u(x,t) &= u_1(x - c\, t) +u_2(x + c\, t),
+\end{align*}
+where $c = \sqrt{gH}$ is the phase speed of the waves. The initial condition $h(x,t)=h_0(x)$ and $u(x,0)=0$ can be used together with \autoref{eq:SWE} to find $h_1$, $h_2$, $u_1$ and $u_2$. From the initial condition, we can find that $h_1(x) + h_2(x) = h_0(x)$, and from the initial velocity we can find that $u_1(x) + u_2(x) = 0$. Using \autoref{eq:SWE} one can derive that $u_1(x) = \frac{c}{H} h_1(x)$ and $u_2(x) = -\frac{c}{H} h_2(x)$. This gives the following solution for the shallow water equations:
+\begin{subequations}
+\begin{align}
+    h(x,t) &= \frac{1}{2} h_0(x - c\, t) + \frac{1}{2} h_0(x + c\, t), \\
+    u(x,t) &= \frac{c}{2H} h_0(x - c\, t) - \frac{c}{2H} h_0(x + c\, t).
+\end{align}
+\end{subequations}
+
+
+\subsection{The numerical models}
+
+
+
+\subsubsection{Leapfrog scheme on an unstaggered grid}
+
+Using the leapfrog scheme for an unstaggered grid, the shallow water equations (\autoref{eq:SWE}) can be discretized as:
+\begin{subequations}
+\begin{align}
+\frac{u_j^{n+1} - u_j^{n-1}}{2\Delta t}
+&= -g \frac{h_{j+1}^n - h_{j-1}^n}{2\Delta x} \\
+\frac{h_j^{n+1} - h_j^{n-1}}{2\Delta t}
+&= -H \frac{u_{j+1}^n - u_{j-1}^n}{2\Delta x},
+\end{align} 
+\end{subequations}
+where the grid was defined as $x_j = j\Delta x$ and $t^n = n\Delta t$. And the courant number $\mu$ is defined as $\mu = \frac{c\,\Delta t}{\Delta x}$. This gives the following step equations for $u$ and $h$:
+\begin{subequations}
+\begin{align}
+u_j^{n+1}
+&= u_j^{n-1}
+- \frac{g\Delta t}{\Delta x}
+\left( h_{j+1}^n - h_{j-1}^n \right) \\
+h_j^{n+1}
+&= h_j^{n-1}
+- \frac{H\Delta t}{\Delta x}
+\left( u_{j+1}^n - u_{j-1}^n \right)
+\end{align}
+\end{subequations}
+One can note that this is stable if $\mu \leq 1$.
+
+However, this scheme uses the fact that we have the values of $u$ and $h$ at time steps $n-1$ and $n$, which means that we need to initialize the model somehow. A common way of doing this is using a forward Euler step for the first time step, which gives:
+\begin{subequations}
+\begin{align}
+u_j^1
+&= u_j^0
+- \frac{g\Delta t}{2\Delta x}
+\left( h_{j+1}^0 - h_{j-1}^0 \right) \\
+h_j^1
+&= h_j^0
+- \frac{H\Delta t}{2\Delta x}
+\left( u_{j+1}^0 - u_{j-1}^0 \right)
+\end{align}
+\end{subequations}
+
+\subsubsection{Leapfrog scheme on an staggered grid}
+If one instead uses a leapfrog scheme with a staggered grid, the shallow water equations (\autoref{eq:SWE}) can be discretized as:
+\begin{align}
+\frac{u_j^{n+1} - u_j^{n-1}}{2\Delta t}
+&= -g \frac{h_{j+1}^n - h_{j}^n}{\Delta x} \\
+\frac{h_j^{n+1} - h_j^{n-1}}{2\Delta t}
+&= -H \frac{u_{j+1}^n - u_{j}^n}{\Delta x},
+\end{align} 
+where the grid now uses $x_j = j\Delta x$ for $h_j$ and $x_{j+\frac{1}{2}} = (j+\frac{1}{2})\Delta x$ for $u_j$ (if one uses the same j-coordinate for $u$ as in $h$). This gives the following step equations for $u$ and $h$:
+\begin{subequations}
+\begin{align}
+u_j^{n+1}
+&= u_j^{n-1}
+- \frac{2g\Delta t}{\Delta x}
+\left( h_{j+1}^n - h_{j}^n \right) \\
+h_j^{n+1}
+&= h_j^{n-1}
+- \frac{2H\Delta t}{\Delta x}
+\left( u_{j+1}^n - u_{j}^n \right)
+\end{align}
+\end{subequations}
+This scheme is stable if $\mu \leq 0.5$. However, it also needs to be initialized, and the same forward Euler step method can be used for this scheme.  
+
+\subsubsection{Robert-Asselin filtering}
+There are different ways to get rid of this computational mode and thus get cleaner results. One common way is to use some kind of filter, such as the Robert-Asselin filter. The Robert-Asselin filter works by smoothing the result, since the computational mode adds background noise. This is done as
+\begin{equation}
+    u_\text{filtered}^n=u^n+\gamma\left(u_\text{filtered}^{n-1}-2u^n+u^{n+1}\right),
+\end{equation}
+where $\gamma$ is a filtering parameter. The Robert-Asselin filter has the drawback in that a it also dampens the result by a factor $\left[1-4\gamma\sin(\omega\Delta t / 2)\right]$ due to the dispersion-like smoothing. Furthermore, this parameter also affects the stability criteria so that, for example, in the unstaggared Leapfrog scheme the stability condition becomes $\mu+\gamma\leq1$. For the staggered Leapfrog scheme, the stability condition becomes $\mu+\gamma\leq0.5$.
+
+\subsection{Error computation}
+The error between a numerical scheme and analytical solution can be quantified using the norm. For a vector $\mathbf{h}^n$, the $\ell_2$-norm is defined as
+\begin{equation}
+\|\mathbf{h}^n\| = \sqrt{ \frac{1}{N} \sum_{j=1}^{N} (h_j^n)^2 }.
+\end{equation}
+
+To obtain a dimensionless measure of the error, the relative error can be computed at time step $n$ as
+\begin{equation}
+\text{error}^n = \frac{\|\mathbf{h}_{\text{numerical}}^n - \mathbf{h}_{\text{analytical}}^n\|}{\|\mathbf{h}_{\text{analytical}}^n\|}.
+\end{equation}

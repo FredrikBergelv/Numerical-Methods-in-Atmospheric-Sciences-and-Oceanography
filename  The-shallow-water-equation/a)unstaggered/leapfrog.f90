@@ -1,0 +1,85 @@
+PROGRAM leapfrog
+
+    implicit none
+
+    real, parameter :: CFL = 0.9
+
+    real, parameter :: dx=0.025, c=1.0, g=1.0, H=1.0
+    real, parameter :: dt = CFL * dx / c
+    real, parameter :: Lx=1.0, Lt=10.0, pi = 4.0 * ATAN(1.0)
+    integer, parameter :: Nx = INT(Lx/dx), Nt = INT(Lt/dt)
+
+    integer :: j, n
+    real :: x
+    real(8), dimension(Nt, Nx) :: h_array, u_array
+    character(len=50) :: filename
+
+
+    ! initialize
+    u_array = 0.0
+    DO j = 1, Nx
+        x = (j-1)*dx
+        if (x<0.6 .AND. x>0.4) then
+            h_array(1,j) = 0.5 + 0.5*cos(10*pi*(x-0.5))
+        else 
+            h_array(1,j) = 0
+        end if
+    END DO
+
+    ! create one more step wit forward Euler
+    DO j = 1, Nx
+        if (j == 1) then
+            h_array(2,j) = h_array(1,j) - (H*dt/(2*dx)) * (u_array(1,j+1) - u_array(1,Nx))
+            u_array(2,j) = u_array(1,j) - (g*dt/(2*dx)) * (h_array(1,j+1) - h_array(1,Nx))
+
+        else if (j == Nx) then
+            h_array(2,j) = h_array(1,j) - (H*dt/(2*dx)) * (u_array(1,1) - u_array(1,j-1))
+            u_array(2,j) = u_array(1,j) - (g*dt/(2*dx)) * (h_array(1,1) - h_array(1,j-1))
+
+        else
+            h_array(2,j) = h_array(1,j) - (H*dt/(2*dx)) * (u_array(1,j+1) - u_array(1,j-1))
+            u_array(2,j) = u_array(1,j) - (g*dt/(2*dx)) * (h_array(1,j+1) - h_array(1,j-1))
+        end if
+    END DO
+
+
+    ! travelling wave
+    DO n = 2, Nt-1
+        DO j = 1, Nx
+            if (j == 1) then 
+                h_array(n+1,j) = h_array(n-1,j) - (H*dt/(dx)) * (u_array(n,j+1) - u_array(n,Nx))
+                u_array(n+1,j) = u_array(n-1,j) - (g*dt/(dx)) * (h_array(n,j+1) - h_array(n,Nx))
+
+            else if (j == Nx) then
+                h_array(n+1,j) = h_array(n-1,j) - (H*dt/(dx)) * (u_array(n,1) - u_array(n,j-1))
+                u_array(n+1,j) = u_array(n-1,j) - (g*dt/(dx)) * (h_array(n,1) - h_array(n,j-1))
+
+            else                               
+                h_array(n+1,j) = h_array(n-1,j) - (H*dt/(dx)) * (u_array(n,j+1) - u_array(n,j-1))
+                u_array(n+1,j) = u_array(n-1,j) - (g*dt/(dx)) * (h_array(n,j+1) - h_array(n,j-1))
+            end if 
+        END DO
+    END DO
+
+
+
+    ! write files
+    write(filename, '(A,F4.2,A)') 'a)unstaggered/h-leapfrog.txt'    
+    open(10, file=filename, status="replace")
+    do n = 1, Nt
+        write(10, *) h_array(n, :)
+    end do
+    close(10)
+
+    write(filename, '(A,F4.2,A)') 'a)unstaggered/u-leapfrog.txt'
+    open(11, file=filename, status="replace")
+    do n = 1, Nt
+        write(11, *) u_array(n, :)
+    end do
+    close(11)
+
+
+    print *, "Simulation completed. Results written to ", filename
+
+
+END PROGRAM leapfrog

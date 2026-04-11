@@ -1,0 +1,105 @@
+\section{The stability of the non-rotating 2D SWE  on a B-grid}
+
+\textbf{(a)} The non-rotating 2-D SWE equations are given as 
+\begin{subequations}
+\begin{empheq}[left=\empheqlbrace]{align}
+\frac{\partial u}{\partial t}& = -g \frac{\partial h}{\partial x} \\
+\frac{\partial v}{\partial t}& = -g \frac{\partial h}{\partial y} \\
+\frac{\partial h}{\partial t}& + H \left( \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} \right) = 0.
+\label{eq:SWE}
+\end{empheq}
+\end{subequations}
+Discretising the equations on an Arakawa B-grid by applying the leapfrog scheme one obtains
+\begin{subequations}
+\begin{empheq}[left=\empheqlbrace]{align}
+\frac{u_{i,j}^{n+1} - u_{i,j}^{n-1}}{2\Delta t} &= -g \frac{h_{i+1,j+1}^{n} + h_{i+1,j}^{n}-h_{i,j+1}^{n}-h_{i,j}^{n}}{2\Delta x} \\
+\frac{v_{i,j}^{n+1} - v_{i,j}^{n-1}}{2\Delta t} &= -g \frac{h_{i,j+1}^{n} + h_{i+1,j+1}^{n}-h_{i+1,j}^{n}-h_{i,j}^{n}}{2\Delta y}
+\\
+\frac{h_{i,j}^{n+1} - h_{i,j}^{n-1}}{2\Delta t}& = - H \left( \frac{u_{i,j}^{n} + u_{i,j-1}^{n}-u_{i-1,j}^{n}-u_{i-1,j-1}^{n}}{2\Delta x} + \frac{v_{i,j}^{n} + v_{i-1,j}^{n}-v_{i,j-1}^{n}-v_{i-1,j-1}^{n}}{2\Delta y} \right).
+\end{empheq}
+\label{eq:discretised_SWE}
+\end{subequations}
+
+\textbf{(b)} To solve for the stability criterion we apply a von Neumann stability analysis. We assume that the solution can be written as a Fourier mode of the form
+\begin{equation}\begin{pmatrix}
+u_{i,j}^{n} \\
+v_{i,j}^{n} \\
+h_{i,j}^{n}
+\end{pmatrix} = \begin{pmatrix}u_0 \\
+v_0 \\
+h_0
+\end{pmatrix} e^{\mathfrak{I}(k i \Delta x + l j \Delta y - \omega n \Delta t)},
+\end{equation}
+where $k$ and $l$ are the wavenumbers in the $x$ and $y$ direction, respectively, $\omega$ is the frequency and $\mathfrak{I}$ is the imaginary unit. 
+
+One can simplify \autoref{eq:discretised_SWE} as
+\begin{subequations}
+\begin{align*}
+u_0 &= -\frac{1}{\lambda - \lambda^{-1}} \frac{g h_0 \Delta t}{\Delta x} \left(e^{\mathfrak{I}k \Delta x}e^{\mathfrak{I}l \Delta y}+ e^{\mathfrak{I}k\Delta x} - e^{\mathfrak{I}l \Delta y}-1\right) \\
+v_0 &= -\frac{1}{\lambda - \lambda^{-1}} \frac{gh_0\Delta t}{\Delta y} \left(e^{\mathfrak{I}k \Delta x}e^{\mathfrak{I}l \Delta y}+ e^{\mathfrak{I}l\Delta y} - e^{\mathfrak{I}k \Delta x}-1\right) \\
+\begin{split}
+    \left(\lambda - \lambda^{-1}\right) h_0 = &- \frac{Hu_0\Delta t}{\Delta x}  \left(1+e^{-\mathfrak{I}l \Delta y} - e^{-\mathfrak{I}k \Delta x}- e^{-\mathfrak{I}k \Delta x}e^{-\mathfrak{I}l \Delta y}\right)  \\ 
+    &- \frac{Hv_0\Delta t}{\Delta y}\left(1+e^{-\mathfrak{I}k \Delta x} - e^{-\mathfrak{I}l \Delta y}- e^{-\mathfrak{I}k \Delta x}e^{-\mathfrak{I}l \Delta y}\right).
+\end{split}
+\end{align*}
+\end{subequations}
+One can simplify this by assuming $\Delta x = \Delta y$ and defining $\mu = \sqrt{gH}\,\Delta t/\Delta x$. Then inserting the expressions for $u_0$ and $v_0$ into the last equation gives
+\begin{equation*}
+    \begin{split}
+    \left(\lambda - \lambda^{-1}\right)^2 &= \mu^2 \left(e^{\mathfrak{I}(k+l) \Delta x}+ e^{\mathfrak{I}k\Delta x} - e^{\mathfrak{I}l \Delta x}-1\right)\left(1+e^{-\mathfrak{I}l \Delta x} - e^{-\mathfrak{I}k \Delta x}- e^{-\mathfrak{I}(k+l) \Delta x}\right) \\ 
+    &
+    + \mu^2 \left(e^{\mathfrak{I}(k+l) \Delta x}+ e^{\mathfrak{I}l\Delta x} - e^{\mathfrak{I}k \Delta x}-1\right)\left(1+e^{-\mathfrak{I}k \Delta x} - e^{-\mathfrak{I}l \Delta x}- e^{-\mathfrak{I}(k+l) \Delta x}\right).
+    \end{split}
+\end{equation*}
+Here one can make the neat observation by using the complex conjugates
+\begin{equation*}
+\begin{split}
+(\lambda - \lambda^{-1})^2
+&= \mu^2 \,(e^{\mathfrak{I}k\Delta x}-1)(e^{\mathfrak{I}l\Delta x}+1)
+\,(1 - e^{-\mathfrak{I}k\Delta x})(1 + e^{-\mathfrak{I}l\Delta x}) \\
+&\quad
++ \mu^2 \,(e^{\mathfrak{I}l\Delta x}-1)(e^{\mathfrak{I}k\Delta x}+1)
+\,(1 - e^{-\mathfrak{I}l\Delta x})(1 + e^{-\mathfrak{I}k\Delta x}).
+\end{split}
+\end{equation*}
+Now using the mathematical fact that 
+\begin{equation}
+    \left(e^{\mathfrak{I}\theta} - 1\right)\left(e^{-\mathfrak{I}\theta}-1\right) = 4\sin^2\left(\frac{\theta}{2}\right) \quad \text{and} \quad \left(e^{\mathfrak{I}\theta} + 1\right)\left(e^{-\mathfrak{I}\theta}+1\right) = 4\cos^2\left(\frac{\theta}{2}\right),
+\end{equation}
+one can simplify the above expression to
+\begin{equation*}
+(\lambda - \lambda^{-1})^2
+= -16\mu^2 \left[
+\sin^2\left(\frac{k\Delta x}{2}\right)\cos^2\left(\frac{l\Delta x}{2}\right)
++
+\cos^2\left(\frac{k\Delta x}{2}\right)\sin^2\left(\frac{l\Delta x}{2}\right)
+\right].
+\end{equation*}
+We now simply define the positive trigonometric expression as $\mathcal{A}^2$. 
+Taking the square root of the above expression gives
+\begin{equation*}
+\lambda - \lambda^{-1} = \pm 4\mathcal{A}\mu \mathfrak{I}.
+\end{equation*}
+Which gives the following expression for $\lambda$:
+\begin{equation*}
+\lambda = \pm 2\mathcal{A}\mu \mathfrak{I} \pm \sqrt{1 - 4\mathcal{A}^2\mu^2}.
+\end{equation*}
+To evaluate the stability of the scheme we need to evaluate the magnitude of $\lambda$. We do this by considering if the square root is real or imaginary. If the square root is imaginary, then the magnitude of $\lambda$ is given by
+\begin{equation*}
+|\lambda|^2 = 4\mathcal{A}^2\mu^2 + \text{root}^2.
+\end{equation*}
+This is greater than 1 for any value of $\mu$ which implies that the root must be real for the scheme to be stable. Thus if the root is real, then the magnitude of $\lambda$ is given by
+\begin{equation*}
+|\lambda|^2 = 4\mathcal{A}^2\mu^2 + \left(1 - 4\mathcal{A}^2\mu^2\right) = 1.
+\end{equation*}
+Thus the scheme is stable if the root is real, which implies that
+\begin{equation*}
+    1 - 4\mathcal{A}^2\mu^2 \geq 0 \quad \Rightarrow \quad \mu \leq \frac{1}{2\mathcal{A}}.
+\end{equation*}
+And since $\mathcal{A}^2$ is positive and has a maximum value of 1, we can thus conclude that the stability criterion. 
+
+\begin{answer}
+    The stability criterion for the non-rotating 2D SWE on a B-grid is given by $\mu \leq \frac{1}{2\mathcal{A}}$, where $\mu$ is the Courant number and $\mathcal{A}$ is a positive trigonometric expression defined as $\mathcal{A}^2 = \sin^2\left(\frac{k\Delta x}{2}\right)\cos^2\left(\frac{l\Delta x}{2}\right) + \cos^2\left(\frac{k\Delta x}{2}\right)\sin^2\left(\frac{l\Delta x}{2}\right)$. 
+    \\ $ $ \\
+    This implies that the scheme is stable if the Courant number $\mu \leq \frac{1}{2}$.
+\end{answer}

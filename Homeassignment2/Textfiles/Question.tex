@@ -1,0 +1,56 @@
+\begin{question}
+    
+\subsection*{Exercise 1 -- Staggered vs Un-staggered Grid}
+
+The following code lines are taken from a larger FORTRAN code that interpolates the
+temperature at a given position (described by a real pseudo-index $x_u$). The original code
+works for an Arakawa C-grid. For simplicity we will consider the 1-D case where the
+Arakawa grid is translated to a staggered grid. The ($x_u$) is defined using $u$-points as a
+reference while the temperature is defined in an $h$-point.
+
+\begin{verbatim}
+SUBROUTINE interp(xu,T)
+
+    ! computes temperature at the position given by xu by interpolating data
+    IMPLICIT NONE
+    INTEGER :: ip, im
+    REAL :: xu, ax, Tint
+    REAL, DIMENSION(:), INTENT(IN) :: T
+    [ ... ]
+    ip = NINT(xu) + 1
+    im = NINT(xu)
+    ax = REAL(ip) - xu
+    Tint = T(im)*ax + T(ip)*(1-ax)
+    [ ... ]
+
+END SUBROUTINE
+\end{verbatim}
+
+Consider the case $x_u = 10.4$ and the temperature values:
+$T(9) = 5$, $T(10) = 10$, $T(11) = 20$.
+
+\begin{enumerate}
+    \item[(a)] Using the code above compute the interpolated temperature ($T_{\text{int}}$) at $x_u$.
+    
+    \item[(b)] The obtained result for interpolated temperature ($T_{\text{int}}$) is wrong. Why? 
+    Fix the code (explain the changes) and recalculate $T_{\text{int}}$.
+    
+    \item[(c)] Would the original interpolation scheme work correctly (for any $x_u$ value) if an
+    unstaggered grid was used instead?
+\end{enumerate}
+
+\subsection*{Exercise 2 -- Order of Accuracy}
+
+Consider the continuity equation of the 1-D shallow water equations:
+\[
+\frac{\partial h}{\partial t} = -H \frac{\partial u}{\partial x}.
+\]
+
+\begin{enumerate}
+    \item[(a)] Derive the order of accuracy for the two differences of the discretised equations
+    centred in time and using an unstaggered grid.
+    
+    \item[(b)] Repeat the previous task using instead a staggered grid.
+\end{enumerate}
+
+\end{question}

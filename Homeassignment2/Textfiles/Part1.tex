@@ -1,0 +1,49 @@
+\newpage
+\section{First exercise}
+
+\textbf{(a)} Initially the code had a problem that it uses the \texttt{NINT} function and not the \texttt{FLOOR} function. This gives incorrect interpolated values when $x_u$ has a decimal part above 0.5. The code was thus changed to 
+\begin{verbatim}
+    SUBROUTINE interp(xu, T, Tint)
+        IMPLICIT NONE
+        REAL, INTENT(IN) :: xu
+        REAL, DIMENSION(:), INTENT(IN) :: T
+        REAL, INTENT(OUT) :: Tint
+        REAL :: ax
+        INTEGER :: ip, im
+
+        ip = FLOOR(xu) + 1
+        im = FLOOR(xu)
+        ax = REAL(ip) - xu
+
+        Tint = T(im)*ax + T(ip)*(1 - ax)
+\end{verbatim}
+Using this corrected code the interpolated temperature at position $x_u=10.4$ was calculated to be $T_{int}=14$. 
+
+\textbf{(b)} However, the code provided had one more issue, since does not use a staggered grid. If we assume a staggered grid then the temperature points a eat the h-points not the u-points($x_u$). are not at the same positions but of set by $\Delta x$. In the staggered grid the we have that $h_j=u_{j-\frac{1}{2}}$. Another way of stating this is that the point $u_j$ is surrounded by 
+\begin{equation}
+    h_{j}< u_j<u_{j+1}. 
+\end{equation}
+However, one must note that the staggering can either be forward or backward, however the common way is to use what i showed above. One can thus modify the code so that the position $x_u=10.4$ lies in the position $x_h=9.9$. One thus has the code as:
+\begin{verbatim}
+    SUBROUTINE interp(xu, T, Tint)
+        IMPLICIT NONE
+        REAL, INTENT(IN) :: xu
+        REAL, DIMENSION(:), INTENT(IN) :: T
+        REAL, INTENT(OUT) :: Tint
+        REAL :: ax, xh
+        INTEGER :: ip, im
+
+        xh = xu-0.5 ! Here we change to h-points
+
+        ip = FLOOR(xh) + 1
+        im = FLOOR(xh)
+        ax = REAL(ip) - xh
+
+        Tint = T(im)*ax + T(ip)*(1 - ax)
+\end{verbatim}
+
+\begin{answer}
+    One thus obtains an answer of $T(x_u=10.4)=T(x_h=9.9)=9.5$.
+\end{answer}
+
+\textbf{(c)} If an unstaggered grid was used then the original code would work just fine since this would imply that $x_u=x_h$. 

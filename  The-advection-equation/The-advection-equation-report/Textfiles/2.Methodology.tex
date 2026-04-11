@@ -1,0 +1,18 @@
+\section{Methodology}
+The goal of this project was to test the Leapfrog scheme (\autoref{eq:leapfrog}) and the Upwind scheme (\autoref{eq:upwind}) for a cosine wave and a cosine pulse. Thus, in the first part, an initial condition of the form
+\begin{equation}
+    u(x,t=0) = \cos\left(2\pi x\right)
+\end{equation}
+was used. The two schemes were computed iteratively in Fortran using a spatial grid of \\ $\Delta x=0.02$ arbitrary length units over an extent $L=1\text{ arbitrary length units}$, a theoretical phase speed of $c=1 \text{ arbitrary velocity units}$, for the Courant numbers $\mu=[1.0, 0.9, 1,1]$. This was firstly examined together with the analytic solution in a Hovmöller diagram for the time extent $t=2.5 \text{ arbitrary time units}$. 
+
+Later the schemes were allowed to run for $t=10^4 \text{ arbitrary time units}$ to examine how the error changed with time. Firstly the phase and amplitude error were analysed. Secondly the relative error from the analytic solution was computed for the different schemes and Courant numbers.  
+
+In the second part a cosine pulse of the form 
+\begin{equation}
+    u(x, t=0) =
+\begin{cases}
+\frac{1}{2} + \frac{1}{2}\cos\bigl(10\pi(x - 0.5)\bigr), & 0.4 \le x \le 0.6, \\
+0, & \text{elsewhere,}
+\end{cases}
+\end{equation}
+was used. The same parameters were used in this part, except that only a Courant number of $\mu=0.9$ was analysed. The models were left to run for $t=2\text{ arbitrary time units}$. A Robert-Asselin filter was then applied to study the removal of the computational mode. A smoothing parameter of $\gamma=0.1$ was chosen. 

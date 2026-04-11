@@ -1,0 +1,63 @@
+PROGRAM upwind
+    implicit none
+
+    call CreateMovementFiles(0.9)
+    call CreateMovementFiles(1.0)
+    call CreateMovementFiles(1.1)
+
+CONTAINS
+
+    subroutine CreateMovementFiles(CFL)
+        implicit none
+
+        real, intent(in) :: CFL
+
+        ! constants
+        real(8), parameter :: delX = 0.02, c = 1.0
+        real(8), parameter :: Lx = 1.0, Lt = 1000.0, pi = 4.0 * ATAN(1.0)
+
+        ! runtime-dependent
+        real(8) :: delT
+        integer :: Nx, Nt
+
+        integer :: j, n
+        real(8) :: x
+        real(8), allocatable :: array(:,:)
+        character(len=50) :: filename
+
+        ! compute runtime values
+        delT = CFL * delX / c
+        Nx = INT(Lx / delX)
+        Nt = INT(Lt / delT)
+
+        allocate(array(Nt, Nx))
+
+        ! initialize
+        DO j = 1, Nx
+            x = (j-1)*delX
+            array(1,j) = cos(2*pi*x)
+        END DO
+
+        ! travelling wave (upwind)
+        DO n = 1, Nt-1
+            DO j = 1, Nx
+                if (j == 1) then 
+                    array(n+1,j) = array(n,j) - CFL * (array(n,j) - array(n,Nx))
+                else                               
+                    array(n+1,j) = array(n,j) - CFL * (array(n,j) - array(n,j-1))
+                end if 
+            END DO
+        END DO
+
+        ! write file
+        write(filename, '(A,F4.2,A)') 'upwind_longtime_CFL_', CFL, '.txt'    
+        open(10, file=filename, status="replace")
+        do n = 1, Nt
+            write(10, *) array(n, :)
+        end do
+        close(10)
+
+        deallocate(array)
+    end subroutine CreateMovementFiles
+
+END PROGRAM upwind

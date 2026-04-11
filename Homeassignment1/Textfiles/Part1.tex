@@ -1,0 +1,54 @@
+\section{First exercise}
+
+\textbf{(a)} The leapfrog scheme is defined as 
+\begin{equation}
+    \frac{u_j^{n+1}-u_j^{n-1}}{2\Delta t} + c \frac{u_{j+1}^n-u_{j-1}^n}{2\Delta x}=0,
+    \label{eq:leapfrog} 
+\end{equation}
+where $x=j\Delta x$, $t=n\Delta t$ and $\mu=c\Delta t/ \Delta x$ is the Courant number. 
+
+\textbf{(b)} Solving \autoref{eq:leapfrog} one obtains 
+\begin{equation}
+    u_j^{n+1}=u_j^{n-1}-\mu \left(u_{j+1}^n-u_{j-1}^n\right).
+\end{equation}
+This can be solved by doing a Fourier ansatz (we assume a wave-solution). This gives us:
+\begin{align*}
+    u_j^n &= u_0 e^{ik\left(j\Delta x-n c_D\Delta t\right)}\\
+    u_j^{n+1} &=u_0 e^{ik\left(j\Delta x-(n+1) c_D\Delta t\right)} = u_j^n e^{-ikc_D\Delta t} = \lambda u_j^n.
+\end{align*}
+Above we defined $\lambda=e^{-ikc_D\Delta t}$, which tells us if the iterations increases which each step or decreases with each step. We can do the same for the spatial steps and we thus obtain:
+\begin{align*}
+    u_j^{n+1} &= \lambda u_j^n \\ 
+    u_j^{n-1} &= \lambda^{-1} u_j^n \\
+    u_{j+1}^n &= e^{ik\Delta x} u_j^n \\ 
+    u_{j-1}^n &= e^{-ik\Delta x} u_j^n 
+\end{align*}
+
+Using this result we can rewrite as \autoref{eq:leapfrog} as 
+\begin{equation}
+    0= \frac{\lambda u_j^n -\lambda^{-1}u_j^n}{2\Delta t} + c \frac{e^{ik\Delta x} u_j^n- e^{-ik\Delta x} u_j^n}{2\Delta x} \implies \lambda = -i\mu\sin(k\Delta x) \pm \sqrt{-\left[\mu\sin(k\Delta x)\right]^2+1}.
+\end{equation}
+
+Again this is stable if $\abs{\lambda}\leq 1$. Thus we check the size of $\lambda$. This gives us two scenarios; either the square-root is imaginary or not. 
+
+\textit{Case 1}: The square root is real (i.e. that $\left[\mu\sin(k\Delta x)\right]^2<1$). This implies that the size of $\lambda$ is: 
+\begin{equation*}
+    \abs{\lambda}^2 = \left[\mu\sin(k\Delta x)\right]^2 - \left[\mu\sin(k\Delta x)\right]^2 +1 = 1,
+\end{equation*}
+i.e. $\lambda\leq1$ and the solution is always stable! 
+
+
+\textit{Case 2}: The square root is imaginary. This implies that expression inside the square-root is less then one, and $\left[\mu\sin(k\Delta x)\right]^2>1$, furthermore this also implies that $\mu\sin(k\Delta x)\geq1$. We thus have something exceeding our bound of $1$ plus minus something else. We thus always obtain one solution outside of our bond.
+
+\begin{answer}
+    Since we cannot determine the value of the $\sin(k\Delta x)$, we must assume that it obtains its largest value $\sin(k\Delta x)=1$ somewhere. We thus end up with the condition that the solution is stable if $\mu\leq1$. 
+\end{answer}
+
+
+\textbf{(c)} The solution gave two roots meaning if $\mu=1$ we have $\lambda_{1,2}=\pm1$. Here $lambda_{1}=1$ is the good physical moe meaning that each step is of the same size, and same sign. However, the $\lambda_{2}=-1$ is the computational mode and will give an error to the solution. 
+
+There are differential methods to avoid this computational mode. One way is to occasional use an euler forward step, to avoid the build up from the computational mode. Another common way is to use some kind of filter. A famous filter is the Robert-Asselin filter. This filter works by first applying ones leapfrog step, and then smoothing the solution by using 
+\begin{equation}
+    u_f^n = u^n + \gamma \left(u_f^{n-1}-2u_{n}+u_{n+1}\right). 
+\end{equation}
+Above one has to choose a suitable smoothing parameter, $\gamma$, to obtain nice smoothing without loosing to much information. That is the drawback of this filtering, that the filter will remove some information (often amplitude) fro the solution, however this will dampen the oscillations fro the computational mode.  

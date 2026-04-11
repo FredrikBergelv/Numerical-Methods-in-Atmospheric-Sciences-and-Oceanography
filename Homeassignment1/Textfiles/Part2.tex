@@ -1,0 +1,50 @@
+\section{Second exercise}
+
+\textbf{(a)} The upwind scheme uses the fact that we know which direction propagation comes from. This gives 
+\begin{align}
+    \frac{u_j^{n+1}-u_j^{n}}{\Delta t} + c \frac{u_j^n-u_{j-1}^n}{\Delta x}=0 \text{ if $c>0$} \\ 
+    \frac{u_j^{n+1}-u_j^{n}}{\Delta t} + c \frac{u_{j+1}^n-u_j^n}{\Delta x}=0 \text{ if $c<0$}.
+    \label{eq:upwind1}
+\end{align}
+I.e. if the wind (the information) travels to the right we must use information from the left, and if the wind travels to the left we must use information from the right.
+
+\textbf{(b)} To derive the stability condition for the upwind scheme, we need to consider each case separately. 
+
+\textit{Case $c>0$:} Using the positive case we can write: 
+\begin{equation}
+   u_j^{n+1} = u_j^n - \mu \left(u_j^n-u_{j-1}^n\right).
+\end{equation}
+again using the Fourier ansatz we can use
+\begin{align*}
+    u_j^{n+1} &= \lambda u_j^n \\ 
+    u_j^{n-1} &= \lambda^{-1} u_j^n \\
+    u_{j+1}^n &= e^{ik\Delta x} u_j^n \\ 
+    u_{j-1}^n &= e^{-ik\Delta x} u_j^n 
+\end{align*}
+and write 
+\begin{eqnarray}
+    \lambda u_j^n = u_j^n -\mu\left(u_j^n-u_j^n e^{-ik\Delta x}\right) \implies \lambda = 1-\mu\left(1-e^{-ik\Delta x}\right)=1-\mu\left[1-\cos(k\Delta x)+i\sin(k\Delta x)\right].
+\end{eqnarray}
+Taking the norm of this to evaluate if $\abs{\lambda}<1$ we obtain: 
+\begin{equation*}
+    \abs{\lambda}^2 = \left[1-\mu+\mu\cos(k\Delta x)\right]^2 + \left[\mu\sin(k\Delta x)\right]^2.
+\end{equation*}
+We observe that the stability depends on $\mu$. For $\mu \in [0,1]$, we have $|\lambda| \leq 1$, implying stability. For $\mu > 1$, the scheme becomes unstable.
+
+\textit{Case $c<0:$} Using the negative case we can write: 
+\begin{equation}
+   u_j^{n+1} = u_j^n - \mu \left(u_{j+1}^n-u_j^n\right).
+\end{equation}
+Rewriting this with the Fourier ansatz gives
+\begin{equation}
+    \lambda u_j^n = u_j^n - \mu \left( u_j^ne^{ik\Delta x}-u_j^n \right) \implies \lambda = 1-\mu\left(e^{ik\Delta x}-1\right) = 1-\mu\left[\cos(k\Delta x)-1+i\sin(k\Delta x)\right].
+\end{equation}
+Taking the norm of this gives: 
+\begin{equation*}
+    \abs{\lambda}^2 = \left[1+\mu-\mu\cos(k\Delta x)\right]^2 + \left[\mu\sin(k\Delta x)\right]^2.
+\end{equation*} 
+We observe that the stability depends on $\mu$ as before. For $ \abs{\mu} \leq 1$, we have $|\lambda| \leq 1$, implying stability. For $\abs{\mu} > 1$, the scheme becomes unstable.
+
+\begin{answer}
+We observe that the stability condition depends on $\mu$. For both $c > 0$ and $c < 0$, the scheme is stable if $ \abs{\mu} \leq 1$.  Thus, independently of the direction of propagation, the upwind scheme is stable provided the Courant number satisfies this condition.
+\end{answer}

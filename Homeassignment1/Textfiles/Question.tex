@@ -1,0 +1,37 @@
+\begin{question}
+    
+\textbf{Exercise 1 - Leapfrog}
+
+Study the leapfrog scheme for the advection equation.
+
+a) Give the leapfrog scheme (centered scheme with 2nd order accuracy in space and time).
+
+b) Derive the stability criterion.
+
+c) Discuss the computational mode and how it can be avoided.
+
+\textbf{Exercise 2 - Upwind}
+
+Study the upwind scheme for the advection equation.
+
+a) Give the upwind scheme (uncentered scheme with 1st order accuracy in space and time).
+
+b) Derive the stability condition.
+
+\textit{HINT: The upwind scheme consists of a forward and backward part!}
+
+\textbf{Exercise 3 - Euler forward}
+
+Study the Euler forward scheme for the diffusion equation.
+
+a) Derive the stability criterion of the Euler forward scheme for the diffusion equation:
+
+\[
+\frac{u^{n+1}_j - u^n_j}{\Delta t} = A \frac{u^n_{j+1} - 2u^n_j + u^n_{j-1}}{(\Delta x)^2}.
+\]
+
+b) Discuss how the time step should be chosen. Why is it good to choose a smaller time step than that given by the stability criterion? Hint: Study how the amplification factor depends on the wavelength, especially the highest frequencies.
+
+c) Are the oscillations that may appear in this scheme a numerical mode?
+
+\end{question}

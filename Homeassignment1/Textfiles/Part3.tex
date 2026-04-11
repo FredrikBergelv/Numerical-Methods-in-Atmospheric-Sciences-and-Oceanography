@@ -1,0 +1,52 @@
+\section{Third exercise}
+\textbf{(a)} From the question it is given theta the Euler forward scheme is 
+\begin{equation}
+    \frac{u^{n+1}_j - u^n_j}{\Delta t} = A \frac{u^n_{j+1} - 2u^n_j + u^n_{j-1}}{(\Delta x)^2}.
+    \label{eq:diffusion}
+\end{equation}  
+Solving this equation gives 
+\begin{equation*}
+    u^{n+1}_j = u^n_j + \frac{A\Delta t}{\left(\Delta x\right)^2} \left( u^n_{j+1} - 2u^n_j + u^n_{j-1}\right).
+\end{equation*}
+To tackle this problem we again use the assumption that the solutions is on the form
+\begin{align*}
+    u_j^{n+1} &= \lambda u_j^n \\ 
+    u_j^{n-1} &= \lambda^{-1} u_j^n \\
+    u_{j+1}^n &= e^{ik\Delta x} u_j^n \\ 
+    u_{j-1}^n &= e^{-ik\Delta x} u_j^n.
+\end{align*}
+This transforms \autoref{eq:diffusion} into
+\begin{equation}
+    \lambda = 1 + \frac{A\Delta t}{\left(\Delta x\right)^2}\left(e^{ik\Delta x}-2+e^{-ik\Delta x} \right)= 1+\nu\left[e^{ik\Delta x}-e^{-ik\Delta x}\right]^2=1-4\nu\sin^2(k\Delta x).
+\end{equation}
+Above we defined the von Neumann constant $\nu=A\Delta t/{\left(\Delta x\right)^2}$. The worst case scenario for stability here is if $\sin(k\Delta x)=1$, which gives 
+\begin{equation*}
+    \lambda = 1- 4\nu.
+\end{equation*}
+If we have that we only want $\abs \lambda <1$ we obtain 
+\begin{equation*}
+    -1\leq 1- 4\nu\geq1 \implies \nu \in \left[0,\frac{1}{2}\right].
+\end{equation*}
+
+\begin{answer}
+    The Euler forward scheme is stable if and only if $\nu \in \left[0,\frac{1}{2}\right]$, where $\nu=A\Delta t/{\left(\Delta x\right)^2}$. 
+\end{answer}
+
+\textbf{(b)}
+The stability criterion for the Euler forward scheme was proven to be 
+\begin{equation*}
+    \nu = \frac{A \Delta t}{(\Delta x)^2} \le \frac{1}{2}.
+\end{equation*}
+Solving for the time step one obtains an upper bound at
+\begin{equation*}
+    \Delta t \leq \frac{(\Delta x)^2}{2A}.
+\end{equation*}
+Choosing the largest time step ($\nu=1/2$)gives the amplification factor 
+\begin{equation*}
+    \lambda = 1 + \left[\cos(k\Delta x) - 1\right].
+\end{equation*}
+Since the shortest possible wavelength is $\lambda_\text{wavelenght}=2\Delta x$, since we need at least to positions for a wave. We thus obtain the fastest frequency to be $k\Delta x\approx \pi$. This implies that for the highest frequencies $\lambda = -1$. 
+
+However, \autoref{eq:diffusion} is suppose to describe a diffusion, but when $\lambda = -1$ we get no damping. Instead we only obtain a flipping sign change with this amplitude factor. Thus it can be smart to choose a smaller time step to obtain a physical damping of the system. 
+
+\textbf{(c)} These oscillations that appear when $\lambda=-1$ is NOT a computational mode. This is because the Euler forward scheme only uses two time steps $n$ and $n+1$, and not three like leapfrog does. Thus one does not obtain a quadratic equation with two roots, but a simple equation with one solution for $\lambda$. This is thus still part of the physical mode, but just behaves badly by oscillations in the short-wave limit. 

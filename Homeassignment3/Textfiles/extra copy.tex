@@ -1,0 +1,102 @@
+\section{The stability of the non-rotating 2D SWE  on a B-grid}
+
+\textbf{(a)} The non-rotating 2-D SWE equations are given as 
+\begin{subequations}
+\begin{align}
+\frac{\partial u}{\partial t}& = -g \frac{\partial h}{\partial x} \\
+\frac{\partial v}{\partial t}& = -g \frac{\partial h}{\partial y} \\
+\frac{\partial h}{\partial t}& + H \left( \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} \right) = 0.
+\end{align}
+\label{eq:SWE}
+\end{subequations}
+Discretising the equations on an Arakawa B-grid by applying the leapfrog scheme one obtains
+\begin{subequations}
+\begin{align}
+\frac{u_{i,j}^{n+1} - u_{i,j}^{n-1}}{2\Delta t} &= -g \frac{h_{i+1,j+1}^{n} + h_{i+1,j}^{n}-h_{i,j+1}^{n}-h_{i,j}^{n}}{2\Delta x} \\
+\frac{v_{i,j}^{n+1} - v_{i,j}^{n-1}}{2\Delta t} &= -g \frac{h_{i,j+1}^{n} + h_{i+1,j+1}^{n}-h_{i+1,j}^{n}-h_{i,j}^{n}}{2\Delta y}
+\\
+\frac{h_{i,j}^{n+1} - h_{i,j}^{n-1}}{2\Delta t}& = - H \left( \frac{u_{i,j}^{n} + u_{i,j-1}^{n}-u_{i-1,j}^{n}-u_{i-1,j-1}^{n}}{2\Delta x} + \frac{v_{i,j}^{n} + v_{i-1,j}^{n}-v_{i,j-1}^{n}-v_{i-1,j-1}^{n}}{2\Delta y} \right).
+\end{align}
+\label{eq:discretised_SWE}
+\end{subequations}
+
+\textbf{(b)} To solve for the stability criterion we apply a von Neumann stability analysis. We assume that the solution can be written as a Fourier mode of the form
+\begin{equation}\begin{pmatrix}
+u_{i,j}^{n} \\
+v_{i,j}^{n} \\
+h_{i,j}^{n}
+\end{pmatrix} = \begin{pmatrix}u_0 \\
+v_0 \\
+h_0
+\end{pmatrix} e^{\mathcal{I}(k i \Delta x + l j \Delta y - \omega n \Delta t)},
+\end{equation}
+where $k$ and $l$ are the wavenumbers in the $x$ and $y$ direction, respectively, $\omega$ is the frequency and $\mathcal{I}$ is the imaginary unit. Substituting this into the spatial and temporal time steps one can transform \autoref{eq:discretised_SWE} to 
+\begin{subequations}
+\begin{align}
+\frac{\lambda u_0 - \lambda^{-1} u_0}{2\Delta t} &= -g \frac{h_0e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+ h_0e^{\mathcal{I}k\Delta x} - h_0e^{\mathcal{I}l \Delta y}-h_0}{2\Delta x} \\
+\frac{\lambda v_0 - \lambda^{-1} v_0}{2\Delta t} &= -g \frac{h_0e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+ h_0e^{\mathcal{I}l\Delta y} - h_0e^{\mathcal{I}k \Delta x}-h_0}{2\Delta y} \\
+\begin{split}
+\frac{\lambda h_0 - \lambda^{-1} h_0}{2\Delta t} = - H  &\left( \frac{u_0+u_0e^{-\mathcal{I}l \Delta y} - u_0e^{-\mathcal{I}k \Delta x}- u_0e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}}{2\Delta x} \right. \\
+&\quad \left. + \frac{v_0+v_0e^{-\mathcal{I}k \Delta x} - v_0e^{-\mathcal{I}l \Delta y}- v_0e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}}{2\Delta y} \right).
+\end{split}
+\end{align}
+\label{eq:discretised_SWE_Fourier}
+\end{subequations}
+Simplifying the above equations above gives
+\begin{subequations}
+\begin{align*}
+u_0 &= -\frac{1}{\lambda - \lambda^{-1}} \frac{g h_0 \Delta t}{\Delta x} \left(e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+ e^{\mathcal{I}k\Delta x} - e^{\mathcal{I}l \Delta y}-1\right) \\
+v_0 &= -\frac{1}{\lambda - \lambda^{-1}} \frac{gh_0\Delta t}{\Delta y} \left(e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+ e^{\mathcal{I}l\Delta y} - e^{\mathcal{I}k \Delta x}-1\right) \\
+\begin{split}
+    \left(\lambda - \lambda^{-1}\right) h_0 = &- \frac{Hu_0\Delta t}{\Delta x}  \left(1+e^{-\mathcal{I}l \Delta y} - e^{-\mathcal{I}k \Delta x}- e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}\right)  \\ 
+    &- \frac{Hv_0\Delta t}{\Delta y}\left(1+e^{-\mathcal{I}k \Delta x} - e^{-\mathcal{I}l \Delta y}- e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}\right).
+\end{split}
+\end{align*}
+\end{subequations}
+Now inserting the expressions for $u_0$ and $v_0$ into the last equation gives
+\begin{equation*}
+    \begin{split}
+    \left(\lambda - \lambda^{-1}\right)^2 &= \frac{gH\left(\Delta t\right)^2}{\left(\Delta x\right)^2} \left(e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+ e^{\mathcal{I}k\Delta x} - e^{\mathcal{I}l \Delta y}-1\right)\left(1+e^{-\mathcal{I}l \Delta y} - e^{-\mathcal{I}k \Delta x}- e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}\right) \\ 
+    &
+    + \frac{gH\left(\Delta t\right)^2}{\left(\Delta y\right)^2} \left(e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+ e^{\mathcal{I}l\Delta y} - e^{\mathcal{I}k \Delta x}-1\right)\left(1+e^{-\mathcal{I}k \Delta x} - e^{-\mathcal{I}l \Delta y}- e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}\right).
+    \end{split}
+\end{equation*}
+If we now use the Courant number $\mu_x = \tfrac{\sqrt{gH}\Delta t}{\Delta x}$ and $\mu_y = \tfrac{\sqrt{gH}\Delta t}{\Delta y}$ we can expand the above expression to get
+\begin{equation*}
+    \begin{split}
+    \left(\lambda - \lambda^{-1}\right)^2 = &\mu_x^2\left[  e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+e^{\mathcal{I}k \Delta x}-e^{\mathcal{I}l \Delta y}-1 \right. \\
+    &\quad+e^{\mathcal{I}k \Delta x}+ e^{\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}-1-e^{\mathcal{I}l \Delta y} \\
+     &\quad-e^{\mathcal{I}l \Delta y}-1+e^{-\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+e^{-\mathcal{I}k \Delta x} \\ 
+     &\quad-1-e^{-\mathcal{I}l \Delta y}+e^{-\mathcal{I}k \Delta x}+e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y} 
+    \left.\right] \\
+    \vspace{1cm}
+    +&\mu_y^2\left[ e^{\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}+e^{\mathcal{I}l \Delta y}-e^{\mathcal{I}k \Delta x}-1  \right.\\
+    &\quad+e^{\mathcal{I}l \Delta y}+ e^{-\mathcal{I}k \Delta x}e^{\mathcal{I}l \Delta y}-1-e^{\mathcal{I}k \Delta x} \\
+    &\quad-e^{\mathcal{I}k \Delta x}-1+e^{\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y}+e^{-\mathcal{I}l \Delta y} \\ 
+    &\quad\left.-1-e^{-\mathcal{I}k \Delta x}+e^{-\mathcal{I}l \Delta y}+e^{-\mathcal{I}k \Delta x}e^{-\mathcal{I}l \Delta y} \right]. 
+    \end{split}
+\end{equation*}
+If we now assume that $\Delta x = \Delta y$, which implies that $\mu_x = \mu_y = \mu$, we thus simplify the above expression to get
+\begin{equation*}
+    \begin{split}
+    \left(\lambda - \lambda^{-1}\right)^2 = &\mu^2\left[  e^{\mathcal{I}(k+l) \Delta x}+e^{\mathcal{I}k \Delta x}-e^{\mathcal{I}l \Delta x}-1 \right. \\
+    &\quad+e^{\mathcal{I}k \Delta x}+ e^{\mathcal{I}(k-l) \Delta x}-1-e^{\mathcal{I}l \Delta x} \\
+     &\quad-e^{\mathcal{I}l \Delta x}-1+e^{\mathcal{I}(-k+l) \Delta x}+e^{-\mathcal{I}k \Delta x} \\ 
+     &\quad-1-e^{-\mathcal{I}l \Delta x}+e^{-\mathcal{I}k \Delta x}+e^{-\mathcal{I}(k+l) \Delta x} \\
+     &\quad e^{\mathcal{I}(k+l) \Delta x}+e^{\mathcal{I}l \Delta x}-e^{\mathcal{I}k \Delta x}-1  \\
+     &\quad+e^{\mathcal{I}l \Delta x}+ e^{\mathcal{I}(-k+l) \Delta x}-1-e^{\mathcal{I}k \Delta x} \\
+     &\quad-e^{\mathcal{I}k \Delta x}-1+e^{\mathcal{I}(k-l) \Delta x}+e^{-\mathcal{I}l \Delta x} \\ 
+     &\quad\left.-1-e^{-\mathcal{I}k \Delta x}+e^{-\mathcal{I}l \Delta x}+e^{-\mathcal{I}(k+l) \Delta x} \right]. 
+    \end{split}
+\end{equation*}
+Simplifying further gives
+\begin{equation*}
+    \begin{split}
+    \left(\lambda - \lambda^{-1}\right)^2 = \mu^2&\left[  -e^{\mathcal{I}k \Delta x}-e^{\mathcal{I}l \Delta x}+e^{-\mathcal{I}k \Delta x}+e^{-\mathcal{I}l \Delta x}-8  \right.\\
+    &\quad \left. +2e^{\mathcal{I}(k+l) \Delta x}
+     + 2e^{\mathcal{I}(k-l) \Delta x} 
+     +2e^{\mathcal{I}(-k+l) \Delta x}  
+     +2e^{-\mathcal{I}(k+l) \Delta x} 
+     \right]
+     \end{split}
+\end{equation*}

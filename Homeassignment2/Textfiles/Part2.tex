@@ -1,0 +1,68 @@
+\newpage
+\section{Second exercise}
+
+\textbf{(a)} The continuity equation is 
+\begin{equation}
+    \frac{\partial h}{\partial t} = -H \frac{\partial u}{\partial x}, 
+    \label{eq:continuity}
+\end{equation}
+where $h(x,t)$ is the height of the water and $u(x,t)$ is the zonal velocity of the fluid. Discretizing this equation cantered in time and space yields on an unstaggered grid: 
+\begin{equation}
+    \frac{h_j^{n+1} - h_j^{n-1}}{2\Delta t}
+= -H \frac{u_{j+1}^n - u_{j-1}^n}{2\Delta x}.
+\end{equation}
+Using Taylor expansions as 
+\begin{align}
+h_j^{n\pm1} &= h_j^n \pm \Delta t \left(\frac{\partial h}{\partial t}\right)^n 
++ \frac{\left[\Delta t\right]^2}{2} \left(\frac{\partial^2 h}{\partial t^2}\right)^n 
+\pm \frac{\left[\Delta t\right]^3}{6} \left(\frac{\partial^3 h}{\partial t^3}\right)^n + \mathcal{O}(\left[t^4\right]), \\
+u_{j\pm1}^{n} &= u_j^n \pm \Delta x \left(\frac{\partial u}{\partial x}\right)_j 
++ \frac{\left[\Delta x\right]^2}{2} \left(\frac{\partial^2 u}{\partial x^2}\right)_j 
+\pm \frac{\left[\Delta x\right]^3}{6} \left(\frac{\partial^3 u}{\partial x^3}\right)_j + \mathcal{O}(\left[x^4\right]),
+\end{align}
+one yields 
+\begin{equation}
+    \frac{h_j^{n+1} - h_j^{n-1}}{2\Delta t}
+= \frac{\partial h}{\partial t} + \frac{\left[\Delta t\right]^2}{6} \left(\frac{\partial^3h}{\partial t^3}\right)^n+ \mathcal{O}(\left[t^3\right]),
+\quad
+\frac{u_{j+1}^n - u_{j-1}^n}{2\Delta x}
+= \frac{\partial u}{\partial x} + \frac{\left[\Delta x\right]^2}{6} \left(\frac{\partial^3u}{\partial x^3}\right)_j + \mathcal{O}(\left[x^3\right]).
+\end{equation}
+Thus, the scheme has an accuracy of second-order in both time and space.
+
+\textbf{(b)} If one uses a staggered grid on \autoref{eq:continuity}, one obtains the discretisation:
+\begin{equation}
+    \frac{{h_{j_h}}^{n+1} - h_{j_h}^{n-1}}{2\Delta t}
+    = -H \frac{u_{j_u}^n - u_{j_u-1}^n}{\Delta x},
+\end{equation}
+where one has to remember that $x_u = j\Delta x$ while $x_h = x_u - \frac{1}{2}\Delta x$. Using the Taylor expansions, where the time derivative of the h-points behave exactly as before. However the spatial derivative of the u-points, one now has to remember is actually centred, since $x_h=x_u(j-\tfrac{1}{2})$. 
+
+We thus expand $u_j^n$ and $u_{j-1}^n$ 
+around the point $x_h = \left(j - \tfrac{1}{2}\right)\Delta x$:
+\begin{align}
+u_j^n &= u_{j_h+\tfrac{1}{2}}^n \\
+&= u_{j_h}^n + \frac{\Delta x}{2} \left(\frac{\partial u}{\partial x}\right)_{j_h}
++ \frac{\left[\Delta x\right]^2}{8} \left(\frac{\partial^2 u}{\partial x^2}\right)_{j_h}
++ \frac{\left[\Delta x\right]^3}{48} \left(\frac{\partial^3 u}{\partial x^3}\right)_{j_h}
++ \mathcal{O}(\left[x^4\right]),
+\\
+u_{j-1}^n &= u_{j_h-\tfrac{1}{2}}^n \\
+&= u_{j_h}^n - \frac{\Delta x}{2} \left(\frac{\partial u}{\partial x}\right)_{j_h}
++ \frac{\left[\Delta x\right]^2}{8} \left(\frac{\partial^2 u}{\partial x^2}\right)_{j_h}
+- \frac{\left[\Delta x\right]^3}{48} \left(\frac{\partial^3 u}{\partial x^3}\right)_{j_h}
++ \mathcal{O}(\Delta \left[x^4\right]).
+\end{align}
+
+Subtracting the two expressions and dividing by $\Delta x$ yields:
+\begin{align}
+\frac{u_j^n - u_{j-1}^n}{\Delta x}
+= \left(\frac{\partial u}{\partial x}\right)_{j_h}
++ \frac{\left[\Delta x\right]^2}{24}\left(\frac{\partial^3u}{\partial x^3}\right)_{j_h}+\mathcal{O}(\Delta \left[x^3\right]).
+\end{align}
+Thus, this scheme also has an accuracy of second-order in both time and space.
+
+\begin{answer}
+    Thus, the order of accuracy in the staggered and unstaggered grid is of the second-order in both time and space, $\mathcal{O}(\left[x^2\right])$ and $\mathcal{O}(\left[t^2\right])$. 
+    \\ \text{ } \\
+    However the new prefactor in the spatial accuracy is $\tfrac{1}{24}$ compared to the old $\tfrac{1}{6}$, and is thus a quarter as big as in the unstaggered case. Thus, the staggered scheme has a smaller truncation error than the unstaggered scheme and will yield spatially more precise result. 
+\end{answer}
