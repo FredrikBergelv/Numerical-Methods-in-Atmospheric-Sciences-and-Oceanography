@@ -1,6 +1,5 @@
 # Numerical Methods for Atmospheric and Oceanographic Sciences
-
-**A collection of numerical methods and implementations** for solving problems in **atmospheric sciences and oceanography**, developed as part of coursework at **Stockholm University**.
+This repository is part of a course in **Numerical Methods in Atmospheric Sciences and Oceanography** (MO8007) at **Stockholm University**. 
 
 This repository includes:
 - **Numerical schemes** for solving PDEs (e.g., advection equation, shallow water equations, etc).
@@ -23,10 +22,6 @@ This repository includes:
 ## **Tools and Languages**
 - **Languages**: Fortran, Python
 - **Focus**: Finite difference schemes, stability analysis, and computational efficiency in geophysical fluid dynamics.
-
----
-## **About**
-This repository is part of a course in **Numerical Methods in Atmospheric Sciences and Oceanography** (MO8007) at **Stockholm University**. 
 
 ---
 ## **Author**
