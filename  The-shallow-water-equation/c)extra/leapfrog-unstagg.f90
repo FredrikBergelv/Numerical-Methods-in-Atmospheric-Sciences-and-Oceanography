@@ -2,7 +2,7 @@ PROGRAM leapfrog
 
     implicit none
 
-    real, parameter :: CFL = 0.9
+    real, parameter :: CFL = 0.45
 
     real, parameter :: dx=0.025, c=1.0, g=1.0, H=1.0
     real, parameter :: dt = CFL * dx / c
@@ -64,19 +64,12 @@ PROGRAM leapfrog
 
 
     ! write files
-    write(filename, '(A,F4.2,A)') 'a)unstaggered/h-leapfrog.txt'    
+    write(filename, '(A,F4.2,A)') 'c)extra/unstagg.txt'    
     open(10, file=filename, status="replace")
     do n = 1, Nt
         write(10, *) h_array(n, :)
     end do
     close(10)
-
-    write(filename, '(A,F4.2,A)') 'a)unstaggered/u-leapfrog.txt'
-    open(11, file=filename, status="replace")
-    do n = 1, Nt
-        write(11, *) u_array(n, :)
-    end do
-    close(11)
 
 
     print *, "Simulation completed. Results written to ", filename

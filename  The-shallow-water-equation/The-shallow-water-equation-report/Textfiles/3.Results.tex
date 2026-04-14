@@ -1,4 +1,6 @@
 \section{Results}
+The result from the unstaggered grid scheme is shown in \autoref{fig:unstaggered}. The solutions shows to propagating waves in both directions, just like the theoretical solution (see \autoref{eq:analytical}). However, the solution is affected by a numerical error, which grows in time. This can be seen by the edge of the pulse showcasing an oscillatory pattern. The solution also shows a small amount of numerical dispersion, since the wave become blurry with time.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{Figures/unstaggered-hovmoller.png}
@@ -6,14 +8,17 @@
     \label{fig:unstaggered}
 \end{figure}
 
+%In \autoref{fig:staggered} the solution from the staggered grid scheme is shown. The solution shows a much better agreement with the theoretical solution, although some minor numerical errors can be seen. Overall, the solution shows a sharper wave than the unstaggered grid solution, which indicates a more precise solution. One can note that this solution uses a smaller Courant number than the unstaggered grid solution since the staggered grid scheme needs a half as large Courant number. 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{Figures/staggered-hovmoller.png}
-    \caption{Hovmöller diagram of the numerical solution using the staggered grid. The propagation of the wave $h(x,t)$ and its velocity $u(x,t)$ is shown over time.}
-    \label{fig:staggered}
-\end{figure}
+%
+%\begin{figure}[H]
+%   \centering
+%    \includegraphics[width=\textwidth]{Figures/staggered-hovmoller.png}
+%    \caption{Hovmöller diagram of the numerical solution using the staggered grid. The propagation of the wave $h(x,t)$ and its velocity $u(x,t)$ is shown over time.}
+%    \label{fig:staggered}
+%\end{figure}
 
+In \autoref{fig:staggered-comparison} the solution from the staggered grid scheme is shown. The solution shows a much better agreement with the theoretical solution, for the same grid spacing. One can note that this solution uses a smaller Courant number than the unstaggered grid solution since the staggered grid scheme needs a half as large Courant number. The solution with the coarsest spatial resolution ($\Delta x = 0.05$) shows a significant amount of numerical error, while the solution with the finest spatial resolution ($\Delta x = 0.0125$) shows a much cleaner solution, with no noticeable numerical errors. 
 
 \begin{figure}[H]
     \centering
@@ -21,6 +26,10 @@
     \caption{Comparison of staggered grid solutions at different spatial resolutions.}
     \label{fig:staggered-comparison}
 \end{figure}
+
+In \autoref{fig:error} one can see the time evolution of the relative error in $h$ for the different numerical schemes. The error is shown for the unstaggered grid scheme and the staggered grid scheme with the different spatial resolutions, together with the Robert-Asselin filter applied to the spatial resolutions of $\Delta x = 0.025$. Since the error is very noisy, a smoothed version of the error is also shown through a moving average filter. 
+
+Interestingly, staggering the grid gave a much smaller error than the unstaggered grid with the Robert-Asselin filter applied. Furthermore, the error of the staggered grid scheme with the coarsest spatial resolution ($\Delta x = 0.05$) is in the same magnitude as the unstaggered grid scheme with the grid resolution of $\Delta x = 0.025$. This shows the significant improvement that staggering the grid gives. Furthermore, applying a Robert-Asselin filter to the staggered grid scheme with showed to lower the error even more, although the effect of the filter is not as significant as as lowering the grid resolution to the finest spatial resolution  of $\Delta x = 0.0125$. 
 
 
 \begin{figure}[H]

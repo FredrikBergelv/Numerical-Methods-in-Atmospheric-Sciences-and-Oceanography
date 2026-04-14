@@ -3,7 +3,7 @@ The goal of this project was to test the Leapfrog scheme (\autoref{eq:leapfrog})
 \begin{equation}
     u(x,t=0) = \cos\left(2\pi x\right)
 \end{equation}
-was used. The two schemes were computed iteratively in Fortran using a spatial grid of \\ $\Delta x=0.02$ arbitrary length units over an extent $L=1\text{ arbitrary length units}$, a theoretical phase speed of $c=1 \text{ arbitrary velocity units}$, for the Courant numbers $\mu=[1.0, 0.9, 1,1]$. This was firstly examined together with the analytic solution in a Hovmöller diagram for the time extent $t=2.5 \text{ arbitrary time units}$. 
+was used. The two schemes were computed iteratively in Fortran using a spatial grid of \\ $\Delta x=0.02$ arbitrary length units over an extent $L=1\text{ arbitrary length units}$, a theoretical phase speed of $c=1 \text{ arbitrary velocity units}$, for the Courant numbers $\mu=[1.0, 0.9, 1.1]$. This was firstly examined together with the analytic solution in a Hovmöller diagram for the time extent $t=2.5 \text{ arbitrary time units}$. 
 
 Later the schemes were allowed to run for $t=10^4 \text{ arbitrary time units}$ to examine how the error changed with time. Firstly the phase and amplitude error were analysed. Secondly the relative error from the analytic solution was computed for the different schemes and Courant numbers.  
 
