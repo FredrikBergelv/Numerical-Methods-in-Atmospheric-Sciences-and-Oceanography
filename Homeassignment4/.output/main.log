@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.25)  1 APR 2026 14:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.11.25)  21 APR 2026 11:10
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/home/fredrik/Documents/Master in Metrology Stockholm/Numerical Methods in Atmospheric Sciences and Oceanography (MO8007)/Homeassignment2/main.tex"
-(/home/fredrik/Documents/Master in Metrology Stockholm/Numerical Methods in Atmospheric Sciences and Oceanography (MO8007)/Homeassignment2/main.tex
+**"/home/fredrik/Documents/Master in Metrology Stockholm/Numerical Methods in Atmospheric Sciences and Oceanography (MO8007)/Homeassignment4/main.tex"
+(/home/fredrik/Documents/Master in Metrology Stockholm/Numerical Methods in Atmospheric Sciences and Oceanography (MO8007)/Homeassignment4/main.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -797,6 +797,105 @@ Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
 )) (/usr/share/texlive/texmf-dist/tex/generic/babel/locale/en/babel-english.tex
 Package babel Info: Importing font and identification data for english
 (babel)             from babel-en.ini. Reported on input line 11.
+) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip81
+\enit@outerparindent=\dimen304
+\enit@toks=\toks61
+\enit@inbox=\box90
+\enit@count@id=\count393
+\enitdp@description=\count394
+) (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen305
+\pgffor@skip=\dimen306
+\pgffor@stack=\toks62
+\pgffor@toks=\toks63
+)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count395
+\pgfplotmarksize=\dimen307
+)
+\tikz@lastx=\dimen308
+\tikz@lasty=\dimen309
+\tikz@lastxsaved=\dimen310
+\tikz@lastysaved=\dimen311
+\tikz@lastmovetox=\dimen312
+\tikz@lastmovetoy=\dimen313
+\tikzleveldistance=\dimen314
+\tikzsiblingdistance=\dimen315
+\tikz@figbox=\box91
+\tikz@figbox@bg=\box92
+\tikz@tempbox=\box93
+\tikz@tempbox@bg=\box94
+\tikztreelevel=\count396
+\tikznumberofchildren=\count397
+\tikznumberofcurrentchild=\count398
+\tikz@fig@count=\count399
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count400
+\pgfmatrixcurrentcolumn=\count401
+\pgf@matrix@numberofcolumns=\count402
+)
+\tikz@expandcount=\count403
+ (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
+File: tikzlibrarymatrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
+File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@layerbox@background=\box95
+\pgf@layerboxsaved@background=\box96
+) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/empheq.sty
+Package: empheq 2017/03/31 v2.15 Emphasizing equations
+ (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+) (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count404
+\calc@Bcount=\count405
+\calc@Adimen=\dimen316
+\calc@Bdimen=\dimen317
+\calc@Askip=\skip82
+\calc@Bskip=\skip83
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count406
+\calc@Cskip=\skip84
+)
+\g_MT_multlinerow_int=\count407
+\l_MT_multwidth_dim=\dimen318
+\origjot=\skip85
+\l_MT_shortvdotswithinadjustabove_dim=\dimen319
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen320
+\l_MT_above_intertext_sep=\dimen321
+\l_MT_below_intertext_sep=\dimen322
+\l_MT_above_shortintertext_sep=\dimen323
+\l_MT_below_shortintertext_sep=\dimen324
+\xmathstrut@box=\box97
+\xmathstrut@dim=\dimen325
+)
+\l_EQ_equationtype_int=\count408
+\l_EQ_alignmentmode_int=\count409
+\l_EQ_totalwidth_dim=\dimen326
+\l_EQ_displaywidth_dim=\dimen327
+\l_EQ_temp_linewidth_dim=\dimen328
+\l_EQ_linewidth_dim=\dimen329
+\EmphEqdelimitershortfall=\dimen330
+\EmphEqdelimiterfactor=\count410
+\g_EQ_toptag_height_dim=\dimen331
+\g_EQ_bottomtag_depth_dim=\dimen332
+\g_EQ_toprow_height_dim=\dimen333
+\g_EQ_bottomrow_depth_dim=\dimen334
+\g_EQ_widesttag_dim=\dimen335
+\EQ_mathdisplay_box=\box98
+\EQ_tag_box=\box99
+\g_EQ_temprow_int=\count411
 )) (./Other/Information.tex) (.output/main.aux)
 \openout1 = `main.aux'.
 
@@ -860,26 +959,20 @@ Package hyperref Info: Link coloring ON on input line 7.
 
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count393
-\scratchdimen=\dimen304
-\scratchbox=\box90
-\nofMPsegments=\count394
-\nofMParguments=\count395
-\everyMPshowfont=\toks61
-\MPscratchCnt=\count396
-\MPscratchDim=\dimen305
-\MPnumerator=\count397
-\makeMPintoPDFobject=\count398
-\everyMPtoPDFconversion=\toks62
+\scratchcounter=\count412
+\scratchdimen=\dimen336
+\scratchbox=\box100
+\nofMPsegments=\count413
+\nofMParguments=\count414
+\everyMPshowfont=\toks64
+\MPscratchCnt=\count415
+\MPscratchDim=\dimen337
+\MPnumerator=\count416
+\makeMPintoPDFobject=\count417
+\everyMPtoPDFconversion=\toks65
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
- (/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
-Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
-)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 504.
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
@@ -896,9 +989,9 @@ Package caption Info: End \AtBeginDocument code.
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 7.
-\c@lstlisting=\count399
+\c@lstlisting=\count418
  (./Other/Title.tex
-<Figures/logo_MISU_EN.pdf, id=15, 590.76207pt x 629.01883pt>
+<Figures/logo_MISU_EN.pdf, id=7, 590.76207pt x 629.01883pt>
 File: Figures/logo_MISU_EN.pdf Graphic file (type pdf)
 <use Figures/logo_MISU_EN.pdf>
 Package pdftex.def Info: Figures/logo_MISU_EN.pdf  used on input line 44.
@@ -914,19 +1007,34 @@ Overfull \hbox (143.54411pt too wide) in paragraph at lines 44--44
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc} <./Figures/logo_MISU_EN.pdf>]) (./Textfiles/Question.tex
-LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 5.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 5.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )) (./Textfiles/Part1.tex
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1 \newpage
-             [1]) (./Textfiles/Part2.tex [2]) [3] 
+l.97 \end{align*}
+                  [1]) (./Textfiles/Part2.tex [2]
+<Figures/cgrid.png, id=82, 852.18375pt x 711.65875pt>
+File: Figures/cgrid.png Graphic file (type png)
+<use Figures/cgrid.png>
+Package pdftex.def Info: Figures/cgrid.png  used on input line 15.
+(pdftex.def)             Requested size: 227.62206pt x 190.08722pt.
+LaTeX Font Info:    Trying to load font information for U+euf on input line 30.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+) [3 <./Figures/cgrid.png>]
+<Figures/sol.png, id=103, 722.7pt x 216.81pt>
+File: Figures/sol.png Graphic file (type png)
+<use Figures/sol.png>
+Package pdftex.def Info: Figures/sol.png  used on input line 95.
+(pdftex.def)             Requested size: 455.24411pt x 136.57448pt.
+) [4{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./Figures/sol.png>] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (.output/main.aux)
  ***********
@@ -934,21 +1042,21 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 71ADD3E942D095975B2212E2F1DEB904;237.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33548 strings out of 474222
- 657160 string characters out of 5748732
- 1950975 words of memory out of 5000000
- 55231 multiletter control sequences out of 15000+600000
- 569552 words of font info for 58 fonts, out of 8000000 for 9000
+ 37636 strings out of 474222
+ 747570 string characters out of 5748732
+ 2069975 words of memory out of 5000000
+ 59239 multiletter control sequences out of 15000+600000
+ 574618 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,12n,96p,2507b,949s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on .output/main.pdf (4 pages, 333561 bytes).
+ 99i,20n,96p,2507b,1076s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb>
+Output written on .output/main.pdf (5 pages, 482399 bytes).
 PDF statistics:
- 182 PDF objects out of 1000 (max. 8388607)
- 128 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
- 34 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 225 PDF objects out of 1000 (max. 8388607)
+ 159 compressed objects within 2 object streams
+ 32 named destinations out of 1000 (max. 500000)
+ 28 words of extra memory for PDF output out of 10000 (max. 10000000)
 

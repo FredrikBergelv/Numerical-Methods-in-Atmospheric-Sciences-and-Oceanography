@@ -1,0 +1,74 @@
+\section{Background}
+
+The 2D shallow water equations (SWE) in their linearized form are given by
+\begin{equation}
+\frac{\partial u}{\partial t} - f v = -g \frac{\partial h}{\partial x},
+\end{equation}
+\begin{equation}
+\frac{\partial v}{\partial t} + f u = -g \frac{\partial h}{\partial y},
+\end{equation}
+\begin{equation}
+\frac{\partial h}{\partial t} + H_0 \left( \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} \right) = 0,
+\end{equation}
+where $u$ and $v$ are the horizontal velocity components, $h$ is the surface height perturbation, $f$ is the Coriolis parameter, $g$ is the gravitational acceleration, and $H_0$ is the mean fluid depth.
+
+These equations can be discretized using a Leapfrog scheme, which is centered in both time and space. On an Arakawa C-grid, this yields
+\begin{equation}
+u_{i,j}^{n+1} = u_{i,j}^{n-1} + 2\Delta t \left[
+- g \frac{h_{i+1,j}^n - h_{i,j}^n}{\Delta x}
++ \frac{f}{4} \left( v_{i,j}^n + v_{i+1,j}^n + v_{i+1,j-1}^n + v_{i,j-1}^n \right)
+\right],
+\end{equation}
+\begin{equation}
+v_{i,j}^{n+1} = v_{i,j}^{n-1} + 2\Delta t \left[
+- g \frac{h_{i,j+1}^n - h_{i,j}^n}{\Delta y}
+- \frac{f}{4} \left( u_{i,j}^n + u_{i,j+1}^n + u_{i-1,j+1}^n + u_{i-1,j}^n \right)
+\right],
+\end{equation}
+\begin{equation}
+h_{i,j}^{n+1} = h_{i,j}^{n-1} - 2 H_0 \Delta t \left[
+\frac{u_{i,j}^n - u_{i-1,j}^n}{\Delta x}
++ \frac{v_{i,j}^n - v_{i,j-1}^n}{\Delta y}
+\right].
+\end{equation}
+
+The Courant number is defined as
+\begin{equation}
+\mu = \frac{\sqrt{g H_0}\,\Delta t}{\sqrt{\Delta x^2 + \Delta y^2}},
+\end{equation}
+and a stable solution requires $\mu < 0.5$ for the staggered (C-grid) Leapfrog scheme.
+
+Since the Leapfrog method requires two previous time levels, an initial step must be computed using a Forward Euler scheme:
+\begin{equation}
+u_{i,j}^{1} = u_{i,j}^{0} + \Delta t \left[
+- g \frac{h_{i+1,j}^0 - h_{i,j}^0}{\Delta x}
++ \frac{f}{4} \left( v_{i,j}^0 + v_{i+1,j}^0 + v_{i+1,j-1}^0 + v_{i,j-1}^0 \right)
+\right],
+\end{equation}
+\begin{equation}
+v_{i,j}^{1} = v_{i,j}^{0} + \Delta t \left[
+- g \frac{h_{i,j+1}^0 - h_{i,j}^0}{\Delta y}
+- \frac{f}{4} \left( u_{i,j}^0 + u_{i,j+1}^0 + u_{i-1,j+1}^0 + u_{i-1,j}^0 \right)
+\right],
+\end{equation}
+\begin{equation}
+h_{i,j}^{1} = h_{i,j}^{0} - H_0 \Delta t \left[
+\frac{u_{i,j}^0 - u_{i-1,j}^0}{\Delta x}
++ \frac{v_{i,j}^0 - v_{i,j-1}^0}{\Delta y}
+\right].
+\end{equation}
+
+The Leapfrog scheme suffers from a computational mode, which manifests as a time-oscillating numerical artifact. A common way to suppress this mode is to apply the Robert–Asselin filter:
+\begin{equation}
+u^{n} \leftarrow u^{n} + \gamma \left( u^{n-1} - 2u^{n} + u^{n+1} \right),
+\end{equation}
+and similarly for $v$ and $h$, where $\gamma$ is a small filtering parameter. The filter modifies the stability condition, which for the staggered Leapfrog scheme becomes approximately
+\begin{equation}
+\mu + \gamma \leq 0.5.
+\end{equation}
+
+To quantify numerical accuracy, a relative error measure can be defined as
+\begin{equation}
+\text{error}^n = \frac{\|\mathbf{h}_{\text{numerical}}^n - \mathbf{h}_{\text{reference}}^n\|}{\|\mathbf{h}_{\text{reference}}^n\|},
+\end{equation}
+where $\|\cdot\|$ denotes an appropriate norm and the reference solution may be the initial condition or an analytical solution.

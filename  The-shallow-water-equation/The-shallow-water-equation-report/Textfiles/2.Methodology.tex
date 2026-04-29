@@ -7,7 +7,7 @@ The numerical solution of the shallow water equations was implemented using two 
         0, & \text{otherwise.}
     \end{cases}
 \end{equation}
-And a velocity field $u$ initialized as zero. Both numerical schemes were implemented using the leapfrog time-stepping method, for a total simulation time of $T=1$ arbitrary time units and a spatial domain of $x \in [0,1]$ arbitrary length units, with periodic boundary conditions. Both models used a phase speed of $c=1$, mean fluid depth of $H=1$ and a gravitational acceleration of $g=1$. 
+And a velocity field $u$ initialized as zero. Both numerical schemes were implemented using the leapfrog time-stepping method, for a total simulation time of $t=1$ arbitrary time units and a spatial domain of $x \in [0,1]$ arbitrary length units, with periodic boundary conditions. Both models used a phase speed of $c=1$, mean fluid depth of $H=1$ and a gravitational acceleration of $g=1$. 
 
 The unstaggered grid scheme was implemented with a spatial resolution of $\Delta x = 0.025$ and a a Courant number of $\mu=0.9$. The staggered grid scheme was implemented with three different spatial resolutions: $\Delta x = 0.05$, $\Delta x = 0.025$ and $\Delta x = 0.0125$, all with a Courant number of $\mu=0.45$. A robert-Asselin filter with a filtering parameter of $\gamma=0.005$ was applied to the staggered grid scheme, while a filter with $\gamma=0.01$ was applied to the unstaggered grid scheme in order to evaluate the effect of the filter on these numerical solutions.
 

@@ -2,10 +2,11 @@
 The shallow water equations are an important tool in oceanography and weather models to evaluate the behaviour of geophysical flows. This is a common type of equations since the horizontal extent of both the ocean and the atmosphere is much larger than their vertical extent, which allows for a simplification of the Navier-Stokes equations as shallow. Furthermore, these equations are much simpler than the full Navier-Stokes equations, which makes them ideal for testing and evaluating numerical schemes. In this report the shallow water equation will be solved using two different numerical grids, the unstaggered grid and the staggered grid. The theory presented in this report will be bases on \citet{Doos2022}. The result from this report will give insight into the world of more advanced numerical schemes, and maybe give insight into why staggered grids are more commonly used in weather models. 
 
 \subsection{Theory}
+The shallow water equations are
 \begin{subequations}
 \begin{empheq}[left=\empheqlbrace]{align}
     \frac{\partial u}{\partial t} + g \frac{\partial h}{\partial x} &= 0 \\
-    \frac{\partial h}{\partial t} + H \frac{\partial u}{\partial x} &= 0
+    \frac{\partial h}{\partial t} + H \frac{\partial u}{\partial x} &= 0.
 \end{empheq}
 \label{eq:SWE}
 \end{subequations}

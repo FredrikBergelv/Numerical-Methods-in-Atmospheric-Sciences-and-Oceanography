@@ -35,6 +35,7 @@
 \usepackage{tcolorbox}
 \usepackage[ddmmyyyy]{datetime}
 \usepackage[english]{babel} 
+\usepackage{enumitem}
 
 \newdateformat{usvardate}{\monthname[\THEMONTH] \THEDAY, \THEYEAR}
 
@@ -65,6 +66,8 @@
 
 \newcommand{\optscalar}[3]{\left< #1 \left| #2\right| #3 \right>}
 
+\usepackage{tikz}
+
 \newcommand{\set}[1]{\left\{#1 \right\}}
 
 \newcommand{\norm}[1]{\left\|\Vec{#1} \right\|}
@@ -90,7 +93,29 @@
   {\begin{tcolorbox}[colframe=white!50!black, colback=white!10!white, title=Answer] }
   {\end{tcolorbox}}     
   
+\usepackage{tikz}
+\usetikzlibrary{matrix, backgrounds}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{empheq}
 
+% whitening factor (0 = original, 0.5 = softer, 0.7 = very soft)
+\def\alpha{0.7}
 
+\pgfmathdeclarefunction{R}{1}{%
+  \pgfmathparse{(1-\alpha)*min(200, abs(#1) * 255) + \alpha*255}%
+}
+\pgfmathdeclarefunction{G}{1}{%
+  \pgfmathparse{(1-\alpha)*min(255, max(0, 4 * #1 * abs(1 - #1) * 255)) + \alpha*255}%
+}
+\pgfmathdeclarefunction{B}{1}{%
+  \pgfmathparse{(1-\alpha)*((abs(1 - #1)) * 255) + \alpha*255}%
+}
 
+\newcommand{\getcolor}[1]{%
+  \pgfmathsetmacro{\red}{R(#1)}%
+  \pgfmathsetmacro{\green}{G(#1)}%
+  \pgfmathsetmacro{\blue}{B(#1)}%
+  \definecolor{currentcolor}{RGB}{\red, \green, \blue}%
+}
 

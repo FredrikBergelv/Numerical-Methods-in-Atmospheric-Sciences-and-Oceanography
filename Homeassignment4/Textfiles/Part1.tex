@@ -1,2 +1,267 @@
-\section{First exercise}
+\section*{Exercise 1 - Laplace Equation}
+\textbf{(a)} If one discretises the Laplace equation in space, one obtains:
+\begin{equation}
+    \frac{\Phi_{i+1,j} - 2\Phi_{i,j} + \Phi_{i-1,j}}{\left(\Delta x\right)^2} + \frac{\Phi_{i,j+1} - 2\Phi_{i,j} + \Phi_{i,j-1}}{\left(\Delta y\right)^2} = 0
+\end{equation}
 
+\textbf{(b)} Setting $\Delta x = \Delta y$ and rearranging the above equation, one obtains
+\begin{equation}
+    \Phi_{i,j} = \frac{1}{4} \left( \Phi_{i+1,j} + \Phi_{i-1,j} + \Phi_{i,j+1} + \Phi_{i,j-1} \right),
+\end{equation}
+which simply is the four-point average of the surrounding points. To use the Jacobi iteration, one can write the above equation as
+\begin{equation}
+    \Phi_{i,j}^{m+1} = \frac{1}{4} \left( \Phi_{i+1,j}^m + \Phi_{i-1,j}^m + \Phi_{i,j+1}^m + \Phi_{i,j-1}^m \right),
+\end{equation}
+where the superscript $m$ denotes the iteration number.
+
+\textbf{(c)} 
+Using the above iterative scheme, one can set up a $4 \times 4$ grid with the initial condition of $\Phi = 0$ and $\Phi = 1$ at the boundaries. After 3 iterations, the grid values are then: 
+
+\begin{align*}
+&\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};}
+\end{bmatrix}
+\implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.500}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.500};} &
+    \tikz[baseline]{\getcolor{0.500}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.500};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.500}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.500};} &
+    \tikz[baseline]{\getcolor{0.500}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.500};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};}
+\end{bmatrix}
+\\
+&\implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.750}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.750};} &
+    \tikz[baseline]{\getcolor{0.750}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.750};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.750}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.750};} &
+    \tikz[baseline]{\getcolor{0.750}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.750};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};}
+\end{bmatrix}
+\implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.875}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.875};} &
+    \tikz[baseline]{\getcolor{0.875}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.875};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{0.875}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.875};} &
+    \tikz[baseline]{\getcolor{0.875}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.875};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.000};}
+\end{bmatrix}
+\end{align*}
+The values in the center of the grid thus obtained a value of $0.875$ after 3 iterations.
+
+\textbf{(d)} Another way to solve the Laplace equation is to use the Gauss-Seidel iteration, which is similar to the Jacobi iteration but uses the most recent values available. The Gauss-Seidel iteration can be written as
+\begin{equation}
+    \Phi_{i,j}^{m+1} = \frac{1}{4} \left( \Phi_{i+1,j}^m + \Phi_{i-1,j}^{m+1} + \Phi_{i,j+1}^m + \Phi_{i,j-1}^{m+1} \right).
+\end{equation}
+Using this iterations scheme one has to update the grid values from left to right and from top to bottom. After 3 iterations, the grid values are then:
+\begin{align*}
+&\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix} \implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.500}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.5000};} &
+    \tikz[baseline]{\getcolor{0.625}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.6250};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.625}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.6250};} &
+    \tikz[baseline]{\getcolor{0.8125}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.8125};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix} \\
+&\implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.8125}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.8125};} &
+    \tikz[baseline]{\getcolor{0.9062}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9062};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.9062}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9062};} &
+    \tikz[baseline]{\getcolor{0.9531}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9531};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix} 
+\implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.9531}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9531};} &
+    \tikz[baseline]{\getcolor{0.9766}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9766};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.9766}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9766};} &
+    \tikz[baseline]{\getcolor{0.9883}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9883};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix}
+\end{align*}
+The values in the center of the grid thus resulted in values between $0.9531$ and $0.9883$ after 3 iterations. One can also compare this result with the Successive Over Relaxation (SOR) iteration scheme which uses 
+\begin{align}
+    u_{i,j}^{m+1} = u_{i,j}^{m}+\omega c, \text{ where }     c=u_{i,j}^{m+1}-u_{i,j}^{m}
+\end{align}
+for a specific relaxation factor $\omega$. The result for $\omega=1.5$ gave 
+\begin{align*}
+&\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{0.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix} \implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.750}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.7500};} &
+    \tikz[baseline]{\getcolor{1.0312}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0312};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.0312}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0312};} &
+    \tikz[baseline]{\getcolor{1.5234}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.5234};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix} \\
+&\implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.1484}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.1484};} &
+    \tikz[baseline]{\getcolor{1.2363}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.2363};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.2363}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.2363};} &
+    \tikz[baseline]{\getcolor{0.9155}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9155};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix} \implies
+\begin{bmatrix}
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.1030}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.1030};} &
+    \tikz[baseline]{\getcolor{0.8888}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.8888};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{0.8888}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.8888};} &
+    \tikz[baseline]{\getcolor{0.9588}\node[fill=currentcolor, anchor=base, inner sep=2pt] {0.9588};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} \\
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};} &
+    \tikz[baseline]{\getcolor{1.000}\node[fill=currentcolor, anchor=base, inner sep=2pt] {1.0000};}
+\end{bmatrix}
+\end{align*}
+The values in the center of the grid thus resulted in values between $0.8888$ and $1.1030$ after 3 iterations. However if the relaxation factor instead was set to $\omega=1.1$ a better result of values between $1.0006$ and $1.0010$ was obtained. 
+
+\begin{answer}
+    The Jacobi iteration resulted in a homogenous convergence towards the final value of $1$. After 3 iterations the Jacobi iteration on a 4x4-grid gave a homogenous result of $87.5\%$ to the real analytical result. The Gauss-Seidel iteration resulted in a inhomogeneous convergence, but faster with a mean result of $97.365\%$ to the real answer. The SOF iteration resulted in a mean $95.985\%$ to the real answer. However using a relaxation factor of $\omega=1.1$ resulted in a result of $100.085\%$ to the real answer.
+    \\ \text{ } \\
+    Thus the best answer was obtained from the SOF iteration with a clever choice of the relaxation factor, however, this might result in a small overestimation of the values. The Gauss-Seidel might otherwise be the best iteration, if homogenous convergence is not of the utter most importance. 
+\end{answer}

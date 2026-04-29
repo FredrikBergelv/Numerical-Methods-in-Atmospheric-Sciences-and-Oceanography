@@ -1,0 +1,40 @@
+\section{Methodology}
+
+A localized perturbation in the free surface height was initialized as a circular bump centered in the domain. The initial condition is a localized Gaussian perturbation centered in the domain:
+\begin{equation}
+h(x,y,0) = 10 \exp\left(-\frac{(x-x_c)^2 + (y-y_c)^2}{0.01\,L_x^2}\right),
+\end{equation}
+where $x_c$ and $y_c$ was chosen to be at the domain center. 
+
+Solid wall boundary conditions were applied at all domain boundaries. This implies that the velocity components vanish at the boundaries as 
+\begin{equation}
+u = 0 \quad \text{at } x=0,\,L_x, \qquad
+v = 0 \quad \text{at } y=0,\,L_y,
+\end{equation}
+which leads to reflection of waves at the domain edges.
+
+The computational domain was discretized using a uniform grid with the following parameters:
+\begin{align}
+N_x &= 100, & N_y &= 100, \\
+L_x &= 100000\,\text{m}, & L_y &= 100000\,\text{m}, \\
+L_t &= 1000\,\text{s}.
+\end{align}
+Other useful parameters were set to $f = 10^{-4}\ \mathrm{s^{-1}}$, $g = 10\ \mathrm{m\,s^{-2}}$, $H_0 = 1000\ \mathrm{m}$, $\mu = 0.45$, and $\gamma = 0.05$.
+
+Model output was saved every $20$ time steps in order to reduce storage requirements while still resolving the temporal evolution of the solution.
+The total energy and volume were computed and stored at every time step as
+\begin{equation}
+V = \sum_{i=1}^{N_x} \sum_{j=1}^{N_y} h_{i,j} \, \Delta x \, \Delta y,
+\end{equation}
+
+\begin{equation}
+E_P = \frac{1}{2} g \sum_{i=1}^{N_x} \sum_{j=1}^{N_y} h_{i,j}^2 \, \Delta x \, \Delta y,
+\end{equation}
+
+\begin{equation}
+E_K = \frac{1}{2} H_0 \sum_{i=1}^{N_x} \sum_{j=1}^{N_y} \left( u_{i,j}^2 + v_{i,j}^2 \right) \Delta x \, \Delta y,
+\end{equation}
+
+where $V$ is the total volume, $E_P$ is the potential energy, and $E_K$ is the kinetic energy of the system.
+
+The Fortran code used to simulate this scheme can be seen in \autoref{code}. 

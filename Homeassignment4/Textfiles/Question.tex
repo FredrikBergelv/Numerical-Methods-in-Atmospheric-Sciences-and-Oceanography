@@ -1,5 +1,32 @@
 \begin{question}
    
+\section*{Exercise 1 - Laplace Equation}
+Consider the Laplace equation:
+\[
+\nabla^2 \Phi = 0
+\]
 
+\begin{enumerate}[label=\alph*)]
+    \item Discretise the equation in space.
+    \item Set $\Delta x = \Delta y$ and write the simplest iterative scheme (Jacobi iteration).
+    \item Set up a $4 \times 4$ grid, with an initial condition of $\Phi = 0$ and $\Phi = 1$ at the boundaries. Iterate 3 times the equation and enter all values.
+    \item Repeat the exercise using a faster iteration scheme (Gauss-Seidel or SOR).
+\end{enumerate}
+
+\section*{Exercise 2 - Semi-Implicit Schemes}
+Consider the non-rotating and $y$-independent shallow water equations on the form:
+\begin{subequations}
+\begin{empheq}[left=\empheqlbrace]{align}
+    \frac{\partial u}{\partial t} &= -g \frac{\partial h}{\partial x}, \label{eq:u} \\
+    \frac{\partial v}{\partial t} &= 0, \label{eq:v} \\
+    \frac{\partial h}{\partial t} &= -H \frac{\partial u}{\partial x}. \label{eq:h}
+\end{empheq}
+\label{eq:SWE}
+\end{subequations}
+
+\begin{enumerate}[label=\alph*)]
+    \item Discretise the equations \eqref{eq:u}, \eqref{eq:v}, \eqref{eq:h} using a semi-implicit scheme centred on time level $n$. Terms containing spatial partial derivatives must be evaluated as the average of the $(n-1)$th and $(n+1)$th time levels (discretise the equations on a C-grid). The implicitness parameter $\beta$ is set to $0.5$.
+    \item Perform a stability analysis for the above discretised equations.
+\end{enumerate}
 
 \end{question}
