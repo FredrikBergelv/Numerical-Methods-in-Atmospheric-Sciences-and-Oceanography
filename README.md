@@ -11,6 +11,7 @@ This repository includes:
 ## **Repository Structure**
 - **[The-advection-equation](The-advection-equation/)** 
 - **[The-shallow-water-equation](The-shallow-water-equation/)**
+- **[The-2D-shallow-water-equation](The-2D-shallow-water-equation/)**
 - **[Fortran-introduction](Fortan-introduction/)**
 - **[Homeassignment1](Homeassignment1/)** 
 - **[Homeassignment2](Homeassignment2/)** 
